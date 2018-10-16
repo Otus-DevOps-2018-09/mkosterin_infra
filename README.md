@@ -25,3 +25,7 @@ Host someinternalhost
 После такой настройки команда 'ssh someinternalhost' будет заводить нас на сервер 10.142.0.3 через bastion без дополнительных
 движений и вопросов.
 
+
+bastion_IP = 35.211.213.113
+someinternalhost_IP = 10.142.0.2
+
