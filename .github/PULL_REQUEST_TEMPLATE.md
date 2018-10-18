@@ -1,3 +1,33 @@
+# Выполнено ДЗ №4
+ - [+] Основное ДЗ
+ - [+] Дополнительные залдания
+## В процессе сделано:
+ - установлен gcloud-sdk
+ - с помощью gcloud создана виртуальная машина, правило брэндмауэра
+ - установлено тестовое приложение и зависимости к нему
+ - написаны sh скрипты для автоматизации развертывания окружения и деплоя приложения
+## Как запустить проект:
+ - выполнить скрипты:
+gcloud compute instances create reddit-app \
+--boot-disk-size=10GB \
+--image-family ubuntu-1604-lts \
+--image-project=ubuntu-os-cloud \
+--machine-type=g1-small \
+--tags puma-server \
+--restart-on-failure \
+--metadata-from-file startup-script=startup.sh
+
+gcloud compute firewall-rules create default-puma-server \
+--allow tcp:9292 \
+--source-ranges 0.0.0.0/0 \
+--target-tags puma-server
+
+## Как проверить работоспособность:
+ - Пройти по адресу: http://35.231.128.85:9292/ увидеть интерфейс работающего приложения
+
+## PR checklist
+ - выставил label "GCP", "cloud-testapp"
+
 # Выполнено ДЗ №3
 
  - [+] Основное ДЗ
