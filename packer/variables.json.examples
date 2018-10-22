@@ -1,0 +1,5 @@
+{
+  "project_id": "prueba",
+  "source_image_family": "prueba",
+  "machine_type": "f1-micro"
+}
