@@ -1,0 +1,15 @@
+[Unit]
+Description=Puma
+After=syslog.target network.target 
+
+[Service]
+Type=simple
+User=appuser
+Group=appuser
+WorkingDirectory=/home/appuser/reddit
+
+ExecStart=/usr/local/bin/puma -C /home/appuser/reddit/config/deploy/production.rb
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
