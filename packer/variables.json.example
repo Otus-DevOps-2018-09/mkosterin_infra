@@ -1,5 +1,14 @@
 {
-  "project_id": "prueba",
-  "source_image_family": "prueba",
-  "machine_type": "f1-micro"
+  "project_id": "vocal-example",
+  "zone": "europe-west1-b",
+  "machine_type": "f1-micro",
+  "image_family_db": "image-db",
+  "image_family_app": "image-app",
+  "source_image_family": "ubuntu-1604-lts",
+  "disk_size": "10",
+  "disk_type": "pd-standard",
+  "network": "default",
+  "image_description_db": "description for db image",
+  "image_description_app": "description for app image"
 }
+
