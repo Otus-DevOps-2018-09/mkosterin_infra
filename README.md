@@ -1,5 +1,15 @@
 # mkosterin_infra
 mkosterin Infra repository
+h2 Домашнее задание №8
+h3 Обязательная часть
+* установлен и натсроен ansible
+* изучены базовые команды
+* повторное исполнение playbook снова клонировало репозиторий, потому что удаление было отслежено неявной задачей gathering facts
+h3 Задание СО *
+* написал файл inventory.json
+* написал скрипт inventory.json.sh, выводящий содержимое inventory.json в stdout
+* команда ansible all -m ping -i ./inventory.json.sh отрабатывает без ошибок
+
 
 h2 Домашнее задание №7
 h3 Обязательная часть
