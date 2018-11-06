@@ -1,0 +1,21 @@
+---
+- name: Set up ruby
+  hosts: all
+  become: true
+  vars:
+    packages:
+      - ruby-full
+      - ruby-bundler
+      - build-essential
+  tasks:
+    - name: Install python-apt
+      apt:
+        name: python-apt
+        state: latest
+    - name: Install ruby and bundler
+      apt:
+        name: "{{ packages }}"
+        update_cache: yes
+        state: present
+
+
