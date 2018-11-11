@@ -1,0 +1,11 @@
+---
+- name: Configure MongoDB
+  hosts: db
+  become: true
+  tasks:
+    - name: Print vars
+      debug:
+        msg: "DB_INTERNAL_IP {{ db_internal_ip }}"
+  roles:
+    - db
+
