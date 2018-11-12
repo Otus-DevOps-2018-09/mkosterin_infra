@@ -45,5 +45,5 @@ script:
   - tflint
   # ansible checks
   - cd ../../ansible
-  - ansible-lint playbooks/*.yml
+  - ansible-lint --ignore-module=jdauphant.nginx playbooks/*.yml
 
