@@ -16,6 +16,11 @@ mkosterin Infra repository
 - проверена работоспособность реверс-прокси
 ### Задание со *
 - на соснове terraform-inventory создано динамическое инвентори для prod/stage окружений
+### Задание со **
+- настроен TravisCI для контроля инфраструктурного репозитория
+- реализованы проверки packer validate, terraform validate, tflint, ansible-lint
+- добавлен бейдж со статусом билда
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/mkosterin_infra.svg?branch=ansible-3)](https://travis-ci.com/Otus-DevOps-2018-09/mkosterin_infra)
 
 ## Домашнее задание №9
 ### Обязательная часть
