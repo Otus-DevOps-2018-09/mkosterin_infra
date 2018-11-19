@@ -1,4 +1,5 @@
 db_host: "{{ db_internal_ip }}"
+deploy_user: "appuser"
 nginx_sites:
   default:
     - listen 80

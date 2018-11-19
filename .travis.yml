@@ -2,48 +2,42 @@ dist: trusty
 sudo: required
 language: bash
 before_install:
-- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh | bash
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
+  bash
 - sudo pip install --upgrade pip
 notifications:
   slack:
     rooms:
-      secure: We+E0UBTXW/LFzFEIMfS1SfDZiSCBw7CbZElYp67oc9XqeAfrlXZ1ecQ0cEShZPBTRHRSuTEqTX4oMRdHyJ+aAqmfL0/zYgKBxRID+WRMDa1AYUxIq1lLqhNtUyLilfQX63IibeLjAPN+i4eTA1SSUddpC81j5MpeEPzxlz/PogeO12qkCBWRCFvzpC03okF5f19JN0IZ8CIGh6VmGblRg8dnKYTuEkokYnBP56ZE7sZg6o/XdZxuYFaTyxUqyCBAQmav4JfeDBJdQ0o5ugir4230Ql/i1cCjpcs3j7xfWP8+51Q8UHb7vgiglXIjPkNP7TB1tWNBj7gIqAG/FGC9bjKB83CcpQRZ57zLdFNymnVNFVZ39CaUIbY9SZTnkq0nJX6hRhLSwMq52X1dLVIT64PH7GSM2pJzH97RoaxPyxPLWqDGzI+Yai+SdX/rqFHggiowSapXToQJOavp7K+xlL4YZP+XgvvzdjuRMBTaWkhS89vlVSwQvvdHXtW+9SKZUdhq/lKFDAcfLtZ2oBr47hfdnWeffnTfY1fJ3Zs3nepumRwHLR0mQ/vr/WN2qraZqYQjQ1pXAoIRs+nhiagxJZxXiJE+2JGwgDoirsn6vmipZFFhpYsVCbKIexzsNha8ZXLwdThd2FpbruqptocAJbsW0BFRLlCsZxIlPg3YM4=
-# We should install neccessary software for checks
+      secure: EFVnnAZuIEmXClkR/stX4gbdp9WzNoErqJRTrlzqhgcscUJgAwoDWlESK3sXWouRmEdXnxPleSBLc0dc01oC3MOm2mqUr0CKDzk2bX4GPay0G5R5CqzRg+GmbbG4eo2WFOPAQK7VGUbAiWJe3pQxpze1MxG9ebMteZuWQZrIKwEfZirMpY4IiAiHbj4v5SQV25hpCQ9DzvJua/aWonk6SFQiC5pFcyhX3ArpY2JPZnaYb9h/q6H4OBfPXwTo//f9hOXEc4dMN4HvUFXkLOrRv93l8mi8xjr2i5DzT/QAllDIAMwdFG4J1gGA3Th6IdCThwVbom6rR5skMmrN2fD2BvMmxFDhnPKxgTOjnn3pzPKCjIt/GcmzKfUBy4jgrRgbQAvSktqjEKr/RP3EaUSli+b3BZwRbX6rJM846Hmp0AqDGS4LNsZVX0Sc2m58JetxBg0T1zMttcvWyyriEso9g0tvQJ/nVB2KEt3UnSzfhIlS7kWHiH3lxnRiZtAqFoKijTA9NWfun7Q5r+X5WYYMl2E7m0hr7dv59BR2ZzQRkux7enztwdQq+UHCfwbcQUA2ESJCp+f9Ctnm0awbZyomfDmVJdfzJsFrwHAmq2hYsf+wPdvKfe95HnIT8gapfhPIqjBqfU+3dVgh+1I+p83ti116fBKrJeENoFYU6JLooEM=
 install:
-  - wget https://releases.hashicorp.com/packer/1.3.1/packer_1.3.1_linux_amd64.zip
-  - wget https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
-  - wget https://github.com/wata727/tflint/releases/download/v0.7.2/tflint_linux_amd64.zip
-  - sudo unzip packer_1.3.1_linux_amd64.zip -d /usr/bin
-  - sudo unzip terraform_0.11.10_linux_amd64.zip -d /usr/bin
-  - sudo unzip tflint_linux_amd64.zip -d /usr/bin
-  - sudo pip install ansible==2.7.1 ansible-lint==3.5.1
-# Make some preperations
+- wget https://releases.hashicorp.com/packer/1.3.1/packer_1.3.1_linux_amd64.zip
+- wget https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_amd64.zip
+- wget https://github.com/wata727/tflint/releases/download/v0.7.2/tflint_linux_amd64.zip
+- sudo unzip packer_1.3.1_linux_amd64.zip -d /usr/bin
+- sudo unzip terraform_0.11.10_linux_amd64.zip -d /usr/bin
+- sudo unzip tflint_linux_amd64.zip -d /usr/bin
+- sudo pip install ansible==2.7.1 ansible-lint==3.5.1
 before_script:
-  - whoami
-  - pwd
-  - touch ~/.ssh/appuser
-  - touch ~/.ssh/appuser.pub
-  - cp terraform/stage/terraform.tfvars.example terraform/stage/terraform.tfvars
-  - cp terraform/prod/terraform.tfvars.example terraform/prod/terraform.tfvars
-# Do checks
+- whoami
+- pwd
+- touch ~/.ssh/appuser
+- touch ~/.ssh/appuser.pub
+- cp terraform/stage/terraform.tfvars.example terraform/stage/terraform.tfvars
+- cp terraform/prod/terraform.tfvars.example terraform/prod/terraform.tfvars
 script:
-  # packer checks
-  - cd packer
-  - packer validate -var-file=variables.json.example ubuntu16.json
-  - packer validate -var-file=variables.json.example immutable.json
-  - cd ..
-  - packer validate -var-file=packer/variables.json.example packer/app.json
-  - packer validate -var-file=packer/variables.json.example packer/db.json
-  # terraform checks
-  - cd terraform/stage
-  - terraform init -backend=false
-  - terraform validate
-  - tflint
-  - cd ../prod
-  - terraform init -backend=false
-  - terraform validate
-  - tflint
-  # ansible checks
-  - cd ../../ansible
-  - ansible-lint --exclude=roles/jdauphant.nginx playbooks/*.yml
-
+- cd packer
+- packer validate -var-file=variables.json.example ubuntu16.json
+- packer validate -var-file=variables.json.example immutable.json
+- cd ..
+- packer validate -var-file=packer/variables.json.example packer/app.json
+- packer validate -var-file=packer/variables.json.example packer/db.json
+- cd terraform/stage
+- terraform init -backend=false
+- terraform validate
+- tflint
+- cd ../prod
+- terraform init -backend=false
+- terraform validate
+- tflint
+- cd ../../ansible
+- ansible-lint --exclude=roles/jdauphant.nginx playbooks/*.yml
