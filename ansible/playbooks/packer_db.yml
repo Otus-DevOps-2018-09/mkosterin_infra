@@ -6,7 +6,6 @@
     - name: Install requirement for ansible - python-apt
       apt:
         name: python-apt
-        state: latest
         update_cache: yes
     - name: Add key for custom repository
       apt_key:
