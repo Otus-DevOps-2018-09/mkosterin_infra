@@ -8,17 +8,5 @@
     msg: "db_host is {{ db_host }}" #variable from dynamic inventory from terraform-inventory
     #correct for normal inventory file    msg: "{{hostvars['dbserver']['ansible_default_ipv4']['address']}}"
 
-- name: Add unit file for Puma
-  copy:
-    src: puma.service
-    dest: /etc/systemd/system/puma.service
-  notify: reload puma
-- name: Add config for DB connection
-  template:
-    src: db_config.j2
-    dest: /home/appuser/db_config
-    owner: appuser
-    group: appuser
-- name: enable puma
-  systemd: name=puma enabled=yes
-
+- include: ruby.yml
+- include: puma.yml

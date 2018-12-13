@@ -1,20 +1,8 @@
 ---
+- import_playbook: base.yml
 - name: Set up ruby
   hosts: all
   become: true
-  vars:
-    packages:
-      - ruby-full
-      - ruby-bundler
-      - build-essential
-  tasks:
-    - name: Install python-apt
-      apt:
-        name: python-apt
-    - name: Install ruby and bundler
-      apt:
-        name: "{{ packages }}"
-        update_cache: yes
-        state: present
-
+  roles:
+    - app
 
